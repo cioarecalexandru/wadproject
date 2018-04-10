@@ -10,6 +10,11 @@ namespace Filmoteca.Controllers
 {
     public class HomeController : Controller
     {
+        public IActionResult Search(string SearchText)
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();

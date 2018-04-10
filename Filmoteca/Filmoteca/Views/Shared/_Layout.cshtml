@@ -1,8 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Filmoteca</title>
 
     <environment include="Development">
@@ -16,30 +17,64 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
-        @RenderBody()
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Filmoteca</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink("Acasa","Index","Home")</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorii <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Actiune</a></li>
+							<li><a href="#">Comedie</a></li>
+							<li><a href="#">Drama</a></li>
+							<li><a href="#">Horror</a></li>
+							<li><a href="#">Thriller</a></li>
+							<li><a href="#">SF</a></li>
+							<li><a href="#">Musical</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Actori</a></li>
+					<li><a href="#">Topuri</a></li>
+				</ul>
+				<form class="navbar-form navbar-left" id="searchForm" asp-action="Search" asp-controller="Home">
+					@using (Html.BeginForm("Search", "Home",FormMethod.Get))
+					{
+						@Html.TextBox("SearchText")
+						<input type="submit" value="Cauta" class="search-button" />
+					}
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+			</div>
+		</nav>
+		@RenderBody()
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+		<environment include="Development">
+			<script src="~/lib/jquery/dist/jquery.js"></script>
+			<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+			<script src="~/js/site.js" asp-append-version="true"></script>
+		</environment>
+		<environment exclude="Development">
+			<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+			        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+			        asp-fallback-test="window.jQuery"
+			        crossorigin="anonymous"
+			        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+			</script>
+			<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+			        asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+			        asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+			        crossorigin="anonymous"
+			        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+			</script>
+			<script src="~/js/site.min.js" asp-append-version="true"></script>
+		</environment>
 
-    @RenderSection("Scripts", required: false)
-</body>
+		@RenderSection("Scripts", required: false)
+	</body>
 </html>
